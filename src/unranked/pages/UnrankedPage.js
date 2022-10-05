@@ -40,6 +40,7 @@ const UnrankedPage = () => {
             <LotteryTicket
               ticketName={ticket.ticketName}
               winningNumbers={ticket.winningNumbers}
+              slots={ticket.slots}
             />
           ))}
         </div>

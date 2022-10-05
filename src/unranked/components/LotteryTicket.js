@@ -1,4 +1,5 @@
 import React from 'react'
+import TicketSlot from './TicketSlot'
 import WinningNumber from './WinningNumber'
 
 const LotteryTicket = (props) => {
@@ -14,7 +15,9 @@ const LotteryTicket = (props) => {
         ))}
       </div>
       <div className='ticket-slots'>
-          
+        {props.slots.map(slot => (
+          <TicketSlot number={slot} />
+        ))}
       </div>
     </div>
   )

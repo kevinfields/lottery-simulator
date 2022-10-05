@@ -24,7 +24,7 @@ export default function loadTicket(winners, slots, accuracy) {
 
   const ticket = {
     ticketName: SIZES[Math.floor(Math.random() * SIZES.length)] + ' ' + RICHES[Math.floor(Math.random() * RICHES.length)],
-    winningNumbers: winningNumbers,
+    winningNumbers: winningNumbers.sort((a, b) => a - b),
     slots: slotNumbers,
   };
 
