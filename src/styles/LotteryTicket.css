@@ -1,0 +1,15 @@
+.single-lottery-ticket {
+  width: 15vw;
+  height: 15vw;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 1vh;
+}
+
+.ticket-name {
+  text-align: center;
+  color: gold;
+  font-size: 15pt;
+  text-shadow: 1px 1px goldenrod;
+}

@@ -15,3 +15,18 @@
   text-align: center;
   padding-top: 2vh;
 }
+
+.ticket-shelf {
+  position: fixed;
+  left: 30vw;
+  top: 35vh;
+  width: 50vw;
+  height: 50vh;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: row;
+  padding: 1vh;
+}
+
+
+
