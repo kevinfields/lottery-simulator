@@ -27,6 +27,16 @@
   height: 5vh;
   width: 3vw;
   border: 1px solid rgb(255, 183, 0);
+  background-color: lightgoldenrodyellow;
+  text-align: center;
+}
+
+.winning-number-slot-revealed {
+  height: 5vh;
+  width: 3vw;
+  border: 1px solid rgb(255, 183, 0);
+  color: red;
+  font-size: 18pt;
   text-align: center;
 }
 
@@ -38,7 +48,24 @@
 }
 
 .ticket-slot {
-  border: 1px solid blue;
+  border: 1px solid black;
   width: 2vw;
   height: 1.5vw;
+  background-color: lightskyblue;
+}
+
+.ticket-slot-loss {
+  border: 1px solid rgb(51, 51, 51);
+  width: 2vw;
+  height: 1.5vw;
+  text-align: center;
+}
+
+.ticket-slot-win {
+  border: 1px solid goldenrod;
+  width: 2vw;
+  height: 1.5vw;
+  color: red;
+  text-align: center;
+  font-weight: bold;
 }

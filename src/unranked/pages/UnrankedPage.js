@@ -4,23 +4,33 @@ import loadTicket from '../../functions/loadTicket';
 import LotteryTicket from '../components/LotteryTicket';
 import '../UnrankedStyles.css';
 import '../../styles/LotteryTicket.css';
+import TicketDisplay from '../components/TicketDisplay';
 const UnrankedPage = () => {
  
   const [loading, setLoading] = useState(true);
   const [money, setMoney] = useState(10);
   const [tickets, setTickets] = useState([]);
 
-  const loadTickets = () => {
+  const loadTickets = (count) => {
     let catcher = [];
-    for (let i=0; i<3; i++) {
-      catcher.push(loadTicket(3, 30, 0.1));
+    for (let i=0; i<count; i++) {
+      catcher.push(loadTicket((i + 3), 30, 0.25));
     };
     setTickets(catcher);
     setLoading(false);
   };
 
+  const buyTicket = (ticket) => {
+
+    let ticketIndex = tickets.find(tkt => tkt.price === ticket.price);
+    let ticketCatcher = [...tickets];
+    ticketCatcher.splice(ticketIndex, 1);
+    setTickets(ticketCatcher);
+  };
+
+
   useEffect(() => {
-    loadTickets();
+    loadTickets(3);
   }, [])
 
   return (
@@ -36,11 +46,12 @@ const UnrankedPage = () => {
           Current Funds: ${money}
         </div>
         <div className='ticket-shelf'>
-          {tickets.map(ticket => (
-            <LotteryTicket
-              ticketName={ticket.ticketName}
-              winningNumbers={ticket.winningNumbers}
-              slots={ticket.slots}
+          {tickets.map((ticket, key) => (
+            <TicketDisplay
+              key={key}
+              ticket={ticket}
+              buyTicket={() => buyTicket(ticket)}
+              price={(key + 1) * 5}
             />
           ))}
         </div>

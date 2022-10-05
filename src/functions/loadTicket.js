@@ -26,6 +26,7 @@ export default function loadTicket(winners, slots, accuracy) {
     ticketName: SIZES[Math.floor(Math.random() * SIZES.length)] + ' ' + RICHES[Math.floor(Math.random() * RICHES.length)],
     winningNumbers: winningNumbers.sort((a, b) => a - b),
     slots: slotNumbers,
+    price: winners * 5,
   };
 
   return ticket;

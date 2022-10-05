@@ -23,10 +23,17 @@
   width: 50vw;
   height: 50vh;
   border: 1px solid blue;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   padding: 1vh;
+  overflow-x: scroll;
 }
 
-
+.buy-ticket-button {
+  width: 15vw;
+  border: 2px solid green;
+  border-radius: 5px;
+  background-color: white;
+}
 
