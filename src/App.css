@@ -1,0 +1,26 @@
+.App {
+  font-family: 'Quicksand';
+}
+
+.page {
+  width: 80vw;
+  height: 80vh;
+  position: fixed;
+  left: 15vw;
+  top: 10vh;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.links {
+  width: 12vw;
+  position: fixed;
+  left: 1vw;
+  height: 80vh;
+  top: 10vh;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
