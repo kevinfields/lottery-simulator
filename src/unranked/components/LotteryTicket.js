@@ -32,6 +32,10 @@ const LotteryTicket = (props) => {
       value: newValue,
     });
   };
+  
+  const adjustViewedSlots = (key) => {
+    props.adjustViewedSlots(key);
+  };
 
   return (
     <div className='single-lottery-ticket'>
@@ -49,10 +53,13 @@ const LotteryTicket = (props) => {
       <div className='ticket-slots'>
         {props.ticket.slots.map((slot, key) => (
           <TicketSlot 
-            number={slot}
+            number={slot.number}
+            opened={slot.viewed}
             key={key}
+            index={key}
             winners={props.ticket.winningNumbers}
             addWinner={(num) => adjustWinnings(num)}
+            addOpened={() => adjustViewedSlots(key)}
           />
         ))}
       </div>

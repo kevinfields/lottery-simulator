@@ -11,9 +11,11 @@ const TicketSlot = (props) => {
     if (revealed) {
       if (props.winners.includes(props.number)) {
         setSuffix('-win');
-        props.addWinner(props.number)
+        props.addWinner(props.number);
+        props.addOpened();
       } else {
         setSuffix('-loss');
+        props.addOpened()
       }
     }
   }, [revealed])
@@ -28,6 +30,12 @@ const TicketSlot = (props) => {
           props.number
         :
           null
+      }
+      {
+        props.opened ?
+        <div>Opened</div>
+        :
+        <div>Closed</div>
       }
     </div>
   )

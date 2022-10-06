@@ -26,9 +26,15 @@ const UnrankedPage = () => {
 
   const buyTicket = (key) => {
 
+    let price = forSale[key].price;
+
+    if (money < price) {
+      return;
+    };
+
     let ticketCatcher = [...forSale];
     let newestTicket = ticketCatcher.splice(key, 1);
-
+    
     ticketCatcher.push(loadTicket(((forSale[key].price / 5) + 2), 30, 0.25));
     setForSale(ticketCatcher);
 
@@ -36,14 +42,23 @@ const UnrankedPage = () => {
     
     myCatcher.push(newestTicket[0]);
     setMyTickets(myCatcher);
+
+    setMoney(money - price);
   };
 
   const openTicket = (key) => {
-
     setViewingShelf(false);
     setOpenedTicket(myTickets[key]);
-    
   };
+
+  const adjustViewedSlots = (key, ticket) => {
+
+    let copy = {...ticket};
+    copy.slots[key].viewed = true;
+    setOpenedTicket({
+      ...copy,
+    })
+  }
 
   useEffect(() => {
     loadTickets(3);
@@ -85,6 +100,7 @@ const UnrankedPage = () => {
           <div className='opened-ticket-display'>
             <LotteryTicket
               ticket={openedTicket}
+              adjustViewedSlots={(key) => adjustViewedSlots(key, openedTicket)}
             />
             <button onClick={() => setViewingShelf(true)}>
               Go Back

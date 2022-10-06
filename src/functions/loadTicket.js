@@ -19,7 +19,10 @@ export default function loadTicket(winners, slots, accuracy) {
   };
 
   for (let i=0; i<slots; i++) {
-    slotNumbers.push(Math.floor(Math.random() * range));
+    slotNumbers.push({
+      number: Math.floor(Math.random() * range),
+      viewed: false,
+    });
   } 
 
   const ticket = {
