@@ -22,13 +22,13 @@ const UnrankedPage = () => {
     setLoading(false);
   };
 
-  const buyTicket = (ticket) => {
+  const buyTicket = (key) => {
 
-    let ticketIndex = forSale.find(tkt => tkt.price === ticket.price);
+    
     let ticketCatcher = [...forSale];
-    let newestTicket = ticketCatcher.splice(ticketIndex, 1);
+    let newestTicket = ticketCatcher.splice(key, 1);
 
-    ticketCatcher.push(loadTicket(((ticket.price / 5) + 2), 30, 0.25));
+    ticketCatcher.push(loadTicket(((forSale[key].price / 5) + 2), 30, 0.25));
     setForSale(ticketCatcher);
 
     let myCatcher = [...myTickets];
@@ -67,7 +67,7 @@ const UnrankedPage = () => {
             <TicketDisplay
               key={key}
               ticket={ticket}
-              buyTicket={() => buyTicket(ticket)}
+              buyTicket={() => buyTicket(key)}
               price={(ticket.winningNumbers.length - 2) * 5}
             />
           ))}
