@@ -14,6 +14,10 @@
   border-radius: 5px;
   text-align: center;
   padding-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  overflow-y: scroll;
 }
 
 .ticket-shelf {
@@ -26,8 +30,25 @@
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+  gap: 0.75vw;
   padding: 1vh;
   overflow-x: scroll;
+}
+
+.ticket-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.ticket-display {
+  width: 15vw;
+  height: 20vw;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  padding: 1vh;
 }
 
 .buy-ticket-button {
@@ -35,5 +56,18 @@
   border: 2px solid green;
   border-radius: 5px;
   background-color: white;
+  box-shadow: 1px 3px 3px 1px darkgreen;
 }
 
+.buy-ticket-button:hover {
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.buy-ticket-button:active {
+  box-shadow: 3px 1px 1px 3px darkgreen;
+}
+
+.wallet-ticket-slip {
+  border: 1px solid black;
+}

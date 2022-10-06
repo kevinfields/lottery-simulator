@@ -5,27 +5,36 @@ import LotteryTicket from '../components/LotteryTicket';
 import '../UnrankedStyles.css';
 import '../../styles/LotteryTicket.css';
 import TicketDisplay from '../components/TicketDisplay';
+import WalletTicketSlip from '../components/WalletTicketSlip';
 const UnrankedPage = () => {
  
   const [loading, setLoading] = useState(true);
   const [money, setMoney] = useState(10);
-  const [tickets, setTickets] = useState([]);
+  const [forSale, setForSale] = useState([]);
+  const [myTickets, setMyTickets] = useState([]);
 
   const loadTickets = (count) => {
     let catcher = [];
     for (let i=0; i<count; i++) {
       catcher.push(loadTicket((i + 3), 30, 0.25));
     };
-    setTickets(catcher);
+    setForSale(catcher);
     setLoading(false);
   };
 
   const buyTicket = (ticket) => {
 
-    let ticketIndex = tickets.find(tkt => tkt.price === ticket.price);
-    let ticketCatcher = [...tickets];
-    ticketCatcher.splice(ticketIndex, 1);
-    setTickets(ticketCatcher);
+    let ticketIndex = forSale.find(tkt => tkt.price === ticket.price);
+    let ticketCatcher = [...forSale];
+    let newestTicket = ticketCatcher.splice(ticketIndex, 1);
+
+    ticketCatcher.push(loadTicket(((ticket.price / 5) + 2), 30, 0.25));
+    setForSale(ticketCatcher);
+
+    let myCatcher = [...myTickets];
+    
+    myCatcher.push(newestTicket[0]);
+    setMyTickets(myCatcher);
   };
 
 
@@ -43,15 +52,23 @@ const UnrankedPage = () => {
           Welcome to the Lottery Store!
         </h1>
         <div className='wallet-container'>
-          Current Funds: ${money}
+          <div className='current-funds'>Current Funds: ${money}</div>
+          <div className='ticket-deck'>
+            {myTickets.map((ticket, key) => (
+              <WalletTicketSlip 
+                ticket={ticket} 
+                key={key}  
+              />
+            ))}
+          </div>
         </div>
         <div className='ticket-shelf'>
-          {tickets.map((ticket, key) => (
+          {forSale.map((ticket, key) => (
             <TicketDisplay
               key={key}
               ticket={ticket}
               buyTicket={() => buyTicket(ticket)}
-              price={(key + 1) * 5}
+              price={(ticket.winningNumbers.length - 2) * 5}
             />
           ))}
         </div>

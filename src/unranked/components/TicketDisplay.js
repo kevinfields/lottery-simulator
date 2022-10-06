@@ -26,7 +26,7 @@ const TicketDisplay = (props) => {
         className='buy-ticket-button'
         onClick={() => props.buyTicket()}
       >
-        Buy This Ticket ({props.price})
+        Buy This Ticket (${props.price})
       </button>
     </div>
   )
