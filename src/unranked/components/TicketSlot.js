@@ -11,6 +11,7 @@ const TicketSlot = (props) => {
     if (revealed) {
       if (props.winners.includes(props.number)) {
         setSuffix('-win');
+        props.addWinner(props.number)
       } else {
         setSuffix('-loss');
       }

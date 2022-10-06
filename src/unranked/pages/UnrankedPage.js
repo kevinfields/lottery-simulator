@@ -12,6 +12,8 @@ const UnrankedPage = () => {
   const [money, setMoney] = useState(10);
   const [forSale, setForSale] = useState([]);
   const [myTickets, setMyTickets] = useState([]);
+  const [viewingShelf, setViewingShelf] = useState(true);
+  const [openedTicket, setOpenedTicket] = useState(null);
 
   const loadTickets = (count) => {
     let catcher = [];
@@ -24,7 +26,6 @@ const UnrankedPage = () => {
 
   const buyTicket = (key) => {
 
-    
     let ticketCatcher = [...forSale];
     let newestTicket = ticketCatcher.splice(key, 1);
 
@@ -37,6 +38,12 @@ const UnrankedPage = () => {
     setMyTickets(myCatcher);
   };
 
+  const openTicket = (key) => {
+
+    setViewingShelf(false);
+    setOpenedTicket(myTickets[key]);
+    
+  };
 
   useEffect(() => {
     loadTickets(3);
@@ -57,21 +64,33 @@ const UnrankedPage = () => {
             {myTickets.map((ticket, key) => (
               <WalletTicketSlip 
                 ticket={ticket} 
-                key={key}  
+                key={key}
+                openTicket={() => openTicket(key)}
               />
             ))}
           </div>
         </div>
-        <div className='ticket-shelf'>
-          {forSale.map((ticket, key) => (
-            <TicketDisplay
-              key={key}
-              ticket={ticket}
-              buyTicket={() => buyTicket(key)}
-              price={(ticket.winningNumbers.length - 2) * 5}
+        {viewingShelf ?
+          <div className='ticket-shelf'>
+            {forSale.map((ticket, key) => (
+              <TicketDisplay
+                key={key}
+                ticket={ticket}
+                buyTicket={() => buyTicket(key)}
+                price={(ticket.winningNumbers.length - 2) * 5}
+              />
+            ))}
+          </div>
+        :
+          <div className='opened-ticket-display'>
+            <LotteryTicket
+              ticket={openedTicket}
             />
-          ))}
-        </div>
+            <button onClick={() => setViewingShelf(true)}>
+              Go Back
+            </button>
+          </div>
+        } 
       </> }
     </div>
   )

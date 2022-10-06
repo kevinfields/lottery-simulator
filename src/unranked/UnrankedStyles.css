@@ -71,3 +71,9 @@
 .wallet-ticket-slip {
   border: 1px solid black;
 }
+
+.opened-ticket-display {
+  position: fixed;
+  left: 42.5vw;
+  top: 40vh;
+}
