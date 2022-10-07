@@ -59,7 +59,29 @@ const UnrankedPage = () => {
     setOpenedTicket({
       ...copy,
     });
+
+    let myTicketCatcher = [...myTickets];
+    myTicketCatcher[ticket.index] = copy;
+    setMyTickets(myTicketCatcher);
+
   };
+
+  const adjustViewedWinnerSlots = (key, ticket) => {
+
+    console.log('we here');
+    console.log('key: ' + key);
+    console.log(JSON.stringify(ticket));
+
+    let copy = {...ticket};
+    copy.winningNumbers[key].viewed = true;
+    setOpenedTicket({
+      ...copy,
+    });
+
+    let myTicketCatcher = [...myTickets];
+    myTicketCatcher[ticket.index] = copy;
+    setMyTickets(myTicketCatcher);
+  }
 
   const claimWinnings = (value) => {
     setMoney(Number(money) + Number(value));
@@ -111,6 +133,7 @@ const UnrankedPage = () => {
             <LotteryTicket
               ticket={openedTicket}
               adjustViewedSlots={(key) => adjustViewedSlots(key, openedTicket)}
+              adjustViewedWinnerSlots={(key) => adjustViewedWinnerSlots(key, openedTicket)}
               claimWinnings={(value, key) => claimWinnings(value, key)}
             />
             <button onClick={() => setViewingShelf(true)}>

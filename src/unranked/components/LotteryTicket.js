@@ -37,6 +37,10 @@ const LotteryTicket = (props) => {
     props.adjustViewedSlots(key);
   };
 
+  const adjustViewedWinnerSlots = (key) => {
+    props.adjustViewedWinnerSlots(key);
+  }
+
   const claimWinnings = () => {
     props.claimWinnings(winnings.value);
   }
@@ -50,7 +54,10 @@ const LotteryTicket = (props) => {
         {props.ticket.winningNumbers.map((number, key) => (
           <WinningNumber
             key={key}
-            number={number} 
+            index={key}
+            number={number.number}
+            addOpened={() => adjustViewedWinnerSlots(key)}
+            opened={number.viewed}
           />
         ))}
       </div>

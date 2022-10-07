@@ -6,7 +6,7 @@ const TicketSlot = (props) => {
   const [revealed, setRevealed] = useState(false);
   let suffix = '';
   if (props.opened) {
-    if (props.winners.includes(props.number)) {
+    if (props.winners.some(num => num.number === props.number)) {
       suffix = '-win';
     } else {
       suffix = '-loss';
@@ -16,7 +16,7 @@ const TicketSlot = (props) => {
   useEffect(() => {
 
     if (revealed) {
-      if (props.winners.includes(props.number)) {
+      if (props.winners.some(num => num.number === props.number)) {
         props.addWinner(props.number);
         props.addOpened();
       } else {

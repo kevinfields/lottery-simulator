@@ -2,24 +2,20 @@ import React, {useState, useEffect} from 'react'
 
 const WinningNumber = (props) => {
  
-  const [suffix, setSuffix] = useState('');
-  const [revealed, setRevealed] = useState(false);
 
-  useEffect(() => {
+  let suffix = '';
+  if (props.opened) {
+    suffix = '-revealed';
+  };
 
-    if (revealed) {
-      setSuffix('-revealed')
-    };
-
-  }, [revealed]);
 
   return (
     <div 
       className={`winning-number-slot${suffix}`}
-      onClick={() => setRevealed(true)}
+      onClick={() => props.addOpened()}
     >
       { 
-        revealed ?
+        props.opened ?
           props.number
         :
           null
