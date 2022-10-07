@@ -1,6 +1,6 @@
 .single-lottery-ticket {
   width: 17.5vw;
-  height: 20vw;
+  height: 22.5vw;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -70,3 +70,32 @@
   font-weight: bold;
 }
 
+
+.known-data {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+
+}
+
+.claim-winnings {
+
+}
+
+.claim-winnings-button {
+  width: 10vw;
+  height: 2vw;
+  border: 1px solid blue;
+  box-shadow: 1px 2px 2px 1px darkblue;
+  border-radius: 5px;
+  background: transparent;
+}
+
+.claim-winnings-button:hover {
+  background: lightblue;
+  cursor: pointer;
+}
+
+.claim-winnings-button:active {
+  box-shadow: 2px 1px 1px 2px darkblue;
+}

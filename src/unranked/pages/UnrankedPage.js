@@ -14,6 +14,7 @@ const UnrankedPage = () => {
   const [myTickets, setMyTickets] = useState([]);
   const [viewingShelf, setViewingShelf] = useState(true);
   const [openedTicket, setOpenedTicket] = useState(null);
+  const [openedKey, setOpenedKey] = useState('');
 
   const loadTickets = (count) => {
     let catcher = [];
@@ -49,16 +50,25 @@ const UnrankedPage = () => {
   const openTicket = (key) => {
     setViewingShelf(false);
     setOpenedTicket(myTickets[key]);
+    setOpenedKey(key);
   };
 
   const adjustViewedSlots = (key, ticket) => {
-
     let copy = {...ticket};
     copy.slots[key].viewed = true;
     setOpenedTicket({
       ...copy,
-    })
-  }
+    });
+  };
+
+  const claimWinnings = (value) => {
+    setMoney(Number(money) + Number(value));
+    setOpenedTicket({...openedTicket, claimed: true});
+
+    let myTicketsCatcher = [...myTickets];
+    myTicketsCatcher[openedKey] = {...openedTicket, claimed: true};
+    setMyTickets(myTicketsCatcher);
+  };
 
   useEffect(() => {
     loadTickets(3);
@@ -101,6 +111,7 @@ const UnrankedPage = () => {
             <LotteryTicket
               ticket={openedTicket}
               adjustViewedSlots={(key) => adjustViewedSlots(key, openedTicket)}
+              claimWinnings={(value, key) => claimWinnings(value, key)}
             />
             <button onClick={() => setViewingShelf(true)}>
               Go Back

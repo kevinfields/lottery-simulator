@@ -37,6 +37,11 @@ const LotteryTicket = (props) => {
     props.adjustViewedSlots(key);
   };
 
+  const claimWinnings = () => {
+    props.claimWinnings(winnings.value);
+    setWinnings({...winnings, value: 0});
+  }
+
   return (
     <div className='single-lottery-ticket'>
       <div className='ticket-name'>
@@ -65,6 +70,20 @@ const LotteryTicket = (props) => {
       </div>
       <div className='known-data'>
           Winnings: ${winnings.value}
+      </div>
+      <div className='claim-winnings'>
+        {props.ticket.claimed ? 
+          <div className='winnings-summary'>
+            You have claimed ${winnings.value}
+          </div>
+        :
+          <button
+            className='claim-winnings-button'
+            onClick={() => claimWinnings()}
+          >
+            Claim Winnings
+          </button>
+        }
       </div>
     </div>
   )
