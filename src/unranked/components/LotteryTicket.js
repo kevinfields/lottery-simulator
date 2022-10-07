@@ -7,7 +7,7 @@ const LotteryTicket = (props) => {
   const [winnings, setWinnings] = useState({
     numbers: [],
     individualNumbers: [],
-    value: 0,
+    value: props.ticket.winnings,
   });
 
   const adjustWinnings = (num) => {
@@ -39,7 +39,6 @@ const LotteryTicket = (props) => {
 
   const claimWinnings = () => {
     props.claimWinnings(winnings.value);
-    setWinnings({...winnings, value: 0});
   }
 
   return (

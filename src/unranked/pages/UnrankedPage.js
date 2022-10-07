@@ -63,10 +63,10 @@ const UnrankedPage = () => {
 
   const claimWinnings = (value) => {
     setMoney(Number(money) + Number(value));
-    setOpenedTicket({...openedTicket, claimed: true});
+    setOpenedTicket({...openedTicket, claimed: true, winnings: Number(value)});
 
     let myTicketsCatcher = [...myTickets];
-    myTicketsCatcher[openedKey] = {...openedTicket, claimed: true};
+    myTicketsCatcher[openedKey] = {...openedTicket, claimed: true, winnings: Number(value)};
     setMyTickets(myTicketsCatcher);
   };
 

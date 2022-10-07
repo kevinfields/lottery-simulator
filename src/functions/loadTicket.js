@@ -32,6 +32,7 @@ export default function loadTicket(winners, slots, accuracy) {
     price: (winners - 2) * 5,
     serialNo: Math.floor(Math.random() * 20000),
     claimed: false,
+    winnings: 0,
   };
 
   return ticket;
