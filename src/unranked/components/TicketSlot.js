@@ -4,21 +4,26 @@ import React, {useState, useEffect} from 'react'
 const TicketSlot = (props) => {
 
   const [revealed, setRevealed] = useState(false);
-  const [suffix, setSuffix] = useState('');
+  let suffix = '';
+  if (props.opened) {
+    if (props.winners.includes(props.number)) {
+      suffix = '-win';
+    } else {
+      suffix = '-loss';
+    };
+  };
   
   useEffect(() => {
 
     if (revealed) {
       if (props.winners.includes(props.number)) {
-        setSuffix('-win');
         props.addWinner(props.number);
         props.addOpened();
       } else {
-        setSuffix('-loss');
         props.addOpened()
       }
     }
-  }, [revealed])
+  }, [revealed]);
 
 
   return (
@@ -26,16 +31,10 @@ const TicketSlot = (props) => {
       className={`ticket-slot${suffix}`}
       onClick={() => setRevealed(true)}
     >
-      { revealed ?
+      { props.opened ?
           props.number
         :
           null
-      }
-      {
-        props.opened ?
-        <div>Opened</div>
-        :
-        <div>Closed</div>
       }
     </div>
   )
