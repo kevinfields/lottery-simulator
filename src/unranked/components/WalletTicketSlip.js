@@ -12,7 +12,11 @@ const WalletTicketSlip = (props) => {
       <div className='ticket-slip-value'>
         ${(props.ticket.winningNumbers.length - 2) * 5}
       </div>
-      <div className='ticket-status'>
+      <div 
+        className='ticket-status'
+        onMouseEnter={() => props.openTicketInfo()}
+        onMouseLeave={() => props.closeTicketInfo()}
+      >
         {"("}{finished}{")"}
       </div>
       <button onClick={() => props.openTicket()}>

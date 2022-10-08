@@ -10,6 +10,8 @@ const LotteryTicket = (props) => {
     value: props.ticket.winnings,
   });
 
+  const [allowClaim, setAllowClaim] = useState(false);
+
   const adjustWinnings = (num) => {
 
     let newNumbers = [...winnings.numbers];
@@ -31,6 +33,7 @@ const LotteryTicket = (props) => {
       individualNumbers: newIndividuals,
       value: newValue,
     });
+    props.adjustCurrentWinnings(newValue);
   };
   
   const adjustViewedSlots = (key) => {
@@ -42,8 +45,16 @@ const LotteryTicket = (props) => {
   }
 
   const claimWinnings = () => {
-    props.claimWinnings(winnings.value);
-  }
+    props.claimWinnings(props.ticket.totalValue);
+  };
+
+  useEffect(() => {
+    if (props.ticket.slots.every(slot => slot.viewed)) {
+      setAllowClaim(true);
+    } else if (allowClaim) {
+      setAllowClaim(false);
+    }
+  }, [props.ticket])
 
   return (
     <div className='single-lottery-ticket'>
@@ -77,20 +88,23 @@ const LotteryTicket = (props) => {
       <div className='known-data'>
           Winnings: ${winnings.value}
       </div>
-      <div className='claim-winnings'>
-        {props.ticket.claimed ? 
-          <div className='winnings-summary'>
-            You have claimed ${winnings.value}
-          </div>
-        :
-          <button
-            className='claim-winnings-button'
-            onClick={() => claimWinnings()}
-          >
-            Claim Winnings
-          </button>
-        }
-      </div>
+      {allowClaim ? 
+        <div className='claim-winnings'>
+          {props.ticket.claimed ? 
+            <div className='winnings-summary'>
+              You have claimed ${props.ticket.totalValue}
+            </div>
+          :
+            <button
+              className='claim-winnings-button'
+              onClick={() => claimWinnings()}
+            >
+              Claim Winnings
+            </button>
+          }
+        </div>
+        : null
+      }
     </div>
   )
 }

@@ -6,6 +6,7 @@ export default function loadTicket(winners, slots, accuracy) {
 
 
   let winningNumbers = [];
+  let winningDigits = [];
   let slotNumbers = [];
   let totalValue = 0;
   let individuals = [];
@@ -15,13 +16,14 @@ export default function loadTicket(winners, slots, accuracy) {
 
   for (let i=0; i<winners; i++) {
     let roll = Math.floor(Math.random() * slots * multiplier);
-    while (winningNumbers.includes(roll)) {
+    while (winningDigits.includes(roll)) {
       roll = Math.floor(Math.random() * slots * multiplier);
     };
     winningNumbers.push({
       number: roll,
       viewed: false,
     });
+    winningDigits.push(roll);
   };
 
   for (let i=0; i<slots; i++) {

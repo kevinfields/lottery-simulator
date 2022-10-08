@@ -15,6 +15,10 @@ const UnrankedPage = () => {
   const [viewingShelf, setViewingShelf] = useState(true);
   const [openedTicket, setOpenedTicket] = useState(null);
   const [openedKey, setOpenedKey] = useState('');
+  const [ticketInfoScreen, setTicketInfoScreen] = useState({
+    open: false,
+    info: {},
+  })
 
   const loadTickets = (count) => {
     let catcher = [];
@@ -35,15 +39,14 @@ const UnrankedPage = () => {
 
     let ticketCatcher = [...forSale];
     let newestTicket = ticketCatcher.splice(key, 1);
-    
+  
     ticketCatcher.push(loadTicket(((forSale[key].price / 5) + 2), 30, 0.25));
     setForSale(ticketCatcher);
 
     let myCatcher = [...myTickets];
-    
+
     myCatcher.push(newestTicket[0]);
     setMyTickets(myCatcher);
-
     setMoney(money - price);
   };
 
@@ -68,10 +71,6 @@ const UnrankedPage = () => {
 
   const adjustViewedWinnerSlots = (key, ticket) => {
 
-    console.log('we here');
-    console.log('key: ' + key);
-    console.log(JSON.stringify(ticket));
-
     let copy = {...ticket};
     copy.winningNumbers[key].viewed = true;
     setOpenedTicket({
@@ -92,56 +91,98 @@ const UnrankedPage = () => {
     setMyTickets(myTicketsCatcher);
   };
 
+  const openTicketInfo = (key, open) => {
+
+
+    if (open) {
+      setTicketInfoScreen({
+        open: true,
+        info: {...myTickets[key]},
+      });
+    } else {
+      setTicketInfoScreen({
+        open: false,
+        info: {},
+      })
+    }
+  };
+
+  const adjustWinnings = (value) => {
+    let myTicketsCatcher = [...myTickets];
+    myTicketsCatcher[openedKey] = {...openedTicket, winnings: Number(value)};
+    setMyTickets(myTicketsCatcher);
+  };
+
   useEffect(() => {
     loadTickets(3);
-  }, [])
+  }, []);
+
 
   return (
     <div className='page'>
       { loading ? 
         <Loading /> 
       : 
-      <> 
-        <h1 className='welcome-header'>
-          Welcome to the Lottery Store!
-        </h1>
-        <div className='wallet-container'>
-          <div className='current-funds'>Current Funds: ${money}</div>
-          <div className='ticket-deck'>
-            {myTickets.map((ticket, key) => (
-              <WalletTicketSlip 
-                ticket={ticket} 
-                key={key}
-                openTicket={() => openTicket(key)}
+        <> 
+          <h1 className='welcome-header'>
+            Welcome to the Lottery Store!
+          </h1>
+          <div className='wallet-container'>
+            <div className='current-funds'>Current Funds: ${money}</div>
+            <div className='ticket-deck'>
+              {myTickets.map((ticket, key) => (
+                <WalletTicketSlip 
+                  ticket={ticket} 
+                  key={key}
+                  openTicket={() => openTicket(key)}
+                  openTicketInfo={() => openTicketInfo(key, true)}
+                  closeTicketInfo={() => openTicketInfo(key, false)}
+                />
+              ))}
+            </div>
+          </div>
+          {viewingShelf ?
+            <div className='ticket-shelf'>
+              {forSale.map((ticket, key) => (
+                <TicketDisplay
+                  key={key}
+                  ticket={ticket}
+                  buyTicket={() => buyTicket(key)}
+                  price={(ticket.winningNumbers.length - 2) * 5}
+                />
+              ))}
+            </div>
+          :
+            <div className='opened-ticket-display'>
+              <LotteryTicket
+                ticket={openedTicket}
+                adjustViewedSlots={(key) => adjustViewedSlots(key, openedTicket)}
+                adjustViewedWinnerSlots={(key) => adjustViewedWinnerSlots(key, openedTicket)}
+                adjustCurrentWinnings={(value) => adjustWinnings(value)}
+                claimWinnings={(value, key) => claimWinnings(value, key)}
               />
-            ))}
-          </div>
-        </div>
-        {viewingShelf ?
-          <div className='ticket-shelf'>
-            {forSale.map((ticket, key) => (
-              <TicketDisplay
-                key={key}
-                ticket={ticket}
-                buyTicket={() => buyTicket(key)}
-                price={(ticket.winningNumbers.length - 2) * 5}
-              />
-            ))}
-          </div>
-        :
-          <div className='opened-ticket-display'>
-            <LotteryTicket
-              ticket={openedTicket}
-              adjustViewedSlots={(key) => adjustViewedSlots(key, openedTicket)}
-              adjustViewedWinnerSlots={(key) => adjustViewedWinnerSlots(key, openedTicket)}
-              claimWinnings={(value, key) => claimWinnings(value, key)}
-            />
-            <button onClick={() => setViewingShelf(true)}>
-              Go Back
-            </button>
-          </div>
-        } 
-      </> }
+              <button onClick={() => setViewingShelf(true)}>
+                Go Back
+              </button>
+            </div>
+          }
+          { ticketInfoScreen.open ?
+            <div className='ticket-info-screen'>
+              <div className='ticket-info-item'>
+                {ticketInfoScreen.info.claimed ? 'Claimed' : 'Unclaimed'}
+              </div>
+              <div className='ticket-info-item'>
+                Value: ${ticketInfoScreen.info.totalValue}
+              </div>
+              <div className='ticket-info-item'>
+                Current Winnings: ${ticketInfoScreen.info.winnings}
+              </div>
+            </div>
+            :
+            null
+          }
+        </>
+      }
     </div>
   )
 }
