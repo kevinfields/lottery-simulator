@@ -49,9 +49,11 @@ const LotteryTicket = (props) => {
   };
 
   useEffect(() => {
-    if (props.ticket.slots.every(slot => slot.viewed)) {
+
+    let viewed = props.ticket.slots.every(slot => slot.viewed);
+    if (viewed) {
       setAllowClaim(true);
-    } else if (allowClaim) {
+    } else if (allowClaim && !viewed) {
       setAllowClaim(false);
     }
   }, [props.ticket])
