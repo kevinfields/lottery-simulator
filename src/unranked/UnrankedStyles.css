@@ -27,6 +27,7 @@
   width: 50vw;
   height: 50vh;
   border: 1px solid blue;
+  box-shadow: 1px 1px 1px 1px darkblue;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
@@ -95,4 +96,19 @@
 
 .ticket-info-item {
   font-size: 7pt;
+}
+
+.funds-tracker {
+  color: red;
+  font-size: 15pt;
+  width: 15vw;
+  text-align: center;
+  position: fixed;
+  left: 42.5vw;
+}
+
+
+.adjust-ticket-chances {
+  position: fixed;
+  left: 65vw;
 }

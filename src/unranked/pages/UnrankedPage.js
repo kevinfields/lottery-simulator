@@ -18,12 +18,17 @@ const UnrankedPage = () => {
   const [ticketInfoScreen, setTicketInfoScreen] = useState({
     open: false,
     info: {},
+  });
+  const [ticketChances, setTicketChances] = useState({
+    extraWinners: 0,
+    slots: 30,
+    accuracy: 4,
   })
 
   const loadTickets = (count) => {
     let catcher = [];
-    for (let i=0; i<count; i++) {
-      catcher.push(loadTicket((i + 3), 30, 0.25));
+    for (let i=ticketChances.extraWinners; i<count; i++) {
+      catcher.push(loadTicket((i + 3), ticketChances.slots, (1 / ticketChances.accuracy)));
     };
     setForSale(catcher);
     setLoading(false);
@@ -40,7 +45,7 @@ const UnrankedPage = () => {
     let ticketCatcher = [...forSale];
     let newestTicket = ticketCatcher.splice(key, 1);
   
-    ticketCatcher.push(loadTicket(((forSale[key].price / 5) + 2), 30, 0.25));
+    ticketCatcher.push(loadTicket((Number(ticketChances.extraWinners) + 3), ticketChances.slots, (1 / ticketChances.accuracy)));
     setForSale(ticketCatcher);
 
     let myCatcher = [...myTickets];
@@ -142,6 +147,7 @@ const UnrankedPage = () => {
             </div>
           </div>
           {viewingShelf ?
+          <>
             <div className='ticket-shelf'>
               {forSale.map((ticket, key) => (
                 <TicketDisplay
@@ -149,9 +155,49 @@ const UnrankedPage = () => {
                   ticket={ticket}
                   buyTicket={() => buyTicket(key)}
                   price={(ticket.winningNumbers.length - 2) * 5}
+                  funds={money}
                 />
               ))}
             </div>
+            <div className='funds-tracker'>
+                <div>You have ${money}</div>
+                {
+                  money === 0 ?
+                  <button onClick={() => setMoney(10)}>Restart</button>
+                  :
+                  null
+                }
+            </div>
+            <div className="adjust-ticket-chances">
+              <div className='ticket-adjuster-slot'>
+                <label htmlFor='winners-adjuster'>Winners: </label>
+                <input
+                  id='winners-adjuster'
+                  value={ticketChances.extraWinners}
+                  type='number'
+                  onChange={(e) => setTicketChances({...ticketChances, extraWinners: e.target.value})}
+                />
+              </div>
+              <div className='ticket-adjuster-slot'>
+                <label htmlFor='slots-adjuster'>Slots: </label>
+                <input
+                  id='slots-adjuster'
+                  value={ticketChances.slots}
+                  type='number'
+                  onChange={(e) => setTicketChances({...ticketChances, slots: e.target.value})}
+                />
+              </div>
+              <div className='ticket-adjuster-slot'>
+                <label htmlFor='accuracy-adjuster'>Accuracy: </label>
+                <input
+                  id='accuracy-adjuster'
+                  value={ticketChances.accuracy}
+                  type='number'
+                  onChange={(e) => setTicketChances({...ticketChances, accuracy: e.target.value})}
+                />
+              </div>
+            </div>
+            </>
           :
             <div className='opened-ticket-display'>
               <LotteryTicket
