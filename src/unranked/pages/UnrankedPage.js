@@ -122,6 +122,25 @@ const UnrankedPage = () => {
     loadTickets(3);
   }, []);
 
+  useEffect(() => {
+
+
+    let newExtras = 0;
+    if (ticketChances.extraWinners >= Number(ticketChances.slots) + 2) {
+      newExtras = Number(ticketChances.slots) + 1;
+      setTicketChances({...ticketChances, extraWinners: newExtras});
+    };
+
+    if (ticketChances.accuracy <= 0) {
+      setTicketChances({...ticketChances, accuracy: 1});
+    };
+
+    if (ticketChances.slots < 3) {
+      setTicketChances({...ticketChances, slots: 3});
+    };
+
+  }, [ticketChances]);
+
 
   return (
     <div className='page'>
