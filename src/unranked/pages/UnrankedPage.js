@@ -139,6 +139,18 @@ const UnrankedPage = () => {
       setTicketChances({...ticketChances, slots: 3});
     };
 
+    if (ticketChances.slots > 50) {
+      setTicketChances({...ticketChances, slot: 50});
+    };
+
+    if (ticketChances.extraWinners > 5) {
+      setTicketChances({...ticketChances, extraWinners: 5});
+    }
+
+    if (ticketChances.extraWinners < 0) {
+      setTicketChances({...ticketChances, extraWinners: 0});
+    };
+
   }, [ticketChances]);
 
 
