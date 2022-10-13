@@ -2,7 +2,7 @@ import React from 'react'
 
 const WalletTicketSlip = (props) => {
 
-  const finished = props.ticket.claimed ? 'Finished' : 'Unfinished';
+  const finished = props.ticket.claimed ? '(Finished)' : '(Unfinished)';
 
   return (
     <div className='wallet-ticket-slip'>
@@ -17,7 +17,7 @@ const WalletTicketSlip = (props) => {
         onMouseEnter={() => props.openTicketInfo()}
         onMouseLeave={() => props.closeTicketInfo()}
       >
-        {"("}{finished}{")"}
+        {finished}
       </div>
       <button onClick={() => props.openTicket()}>
         View This Ticket
