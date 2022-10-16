@@ -201,7 +201,7 @@ const UnrankedPage = () => {
             </div>
             <div className="adjust-ticket-chances">
               <div className='ticket-adjuster-slot'>
-                <label htmlFor='winners-adjuster'>Winners: </label>
+                <label htmlFor='winners-adjuster'>Winners - 3: </label>
                 <input
                   id='winners-adjuster'
                   value={ticketChances.extraWinners}
