@@ -6,6 +6,7 @@ import '../UnrankedStyles.css';
 import '../../styles/LotteryTicket.css';
 import TicketDisplay from '../components/TicketDisplay';
 import WalletTicketSlip from '../components/WalletTicketSlip';
+import IPAddressPage from './IPAddressPage';
 const UnrankedPage = () => {
  
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,7 @@ const UnrankedPage = () => {
   const [viewingShelf, setViewingShelf] = useState(true);
   const [openedTicket, setOpenedTicket] = useState(null);
   const [openedKey, setOpenedKey] = useState('');
+  const [ipAddress, setIPAddress] = useState('');
   const [ticketInfoScreen, setTicketInfoScreen] = useState({
     open: false,
     info: {},
@@ -163,6 +165,8 @@ const UnrankedPage = () => {
           <h1 className='welcome-header'>
             Welcome to the Lottery Store!
           </h1>
+          <IPAddressPage onGetIp={(ip) => setIPAddress(ip)}/>
+          <div>{ipAddress}</div>
           <div className='wallet-container'>
             <div className='current-funds'>Current Funds: ${money}</div>
             <div className='ticket-deck'>
