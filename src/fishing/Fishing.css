@@ -1,0 +1,20 @@
+.welcome {
+  position: fixed;
+  left: 45vw;
+  top: 10vh;
+  width: 20vw;
+  height: 10vh;
+  text-align: center;
+  font-size: 15pt;
+  color: blue;
+  text-shadow: 1px 1px darkblue;
+}
+
+.fish {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

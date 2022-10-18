@@ -66,9 +66,7 @@ const UnrankedPage = () => {
   const adjustViewedSlots = (key, ticket) => {
     let copy = {...ticket};
     copy.slots[key].viewed = true;
-    setOpenedTicket({
-      ...copy,
-    });
+    setOpenedTicket(copy);
 
     let myTicketCatcher = [...myTickets];
     myTicketCatcher[ticket.index] = copy;
@@ -80,9 +78,7 @@ const UnrankedPage = () => {
 
     let copy = {...ticket};
     copy.winningNumbers[key].viewed = true;
-    setOpenedTicket({
-      ...copy,
-    });
+    setOpenedTicket(copy);
 
     let myTicketCatcher = [...myTickets];
     myTicketCatcher[ticket.index] = copy;

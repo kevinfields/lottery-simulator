@@ -10,6 +10,9 @@ const Links = () => {
       <Link to='/unranked-game'>
         Unranked Game
       </Link>
+      <Link to='/fishing-pond'>
+        Fishing Pond
+      </Link>
     </div>
   )
 }

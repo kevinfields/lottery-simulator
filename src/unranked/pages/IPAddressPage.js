@@ -20,7 +20,7 @@ const IPAddressPage = (props) => {
 
   return (
     <div className='ip-address-box'>
-      IP ADDRESS : {myAddress}
+      PUBLIC IP : {myAddress}
     </div>
   )
 }

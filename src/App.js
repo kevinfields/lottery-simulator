@@ -4,6 +4,7 @@ import { Routes, Route, useNavigate} from "react-router-dom";
 import HomePage from './pages/HomePage';
 import Links from './components/Links';
 import UnrankedPage from './unranked/pages/UnrankedPage';
+import FishingPage from './fishing/pages/FishingPage';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
         <Route
           path='/unranked-game'
           element={<UnrankedPage />}
+        />
+        <Route
+          path='/fishing-pond'
+          element={<FishingPage />}
         />
       </Routes>
       <Links />
