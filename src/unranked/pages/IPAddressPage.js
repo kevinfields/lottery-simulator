@@ -16,9 +16,10 @@ const IPAddressPage = (props) => {
 
   useEffect(() => {
     loadAddress();
-  }, [])
+  }, []);
+
   return (
-    <div className='page'>
+    <div className='ip-address-box'>
       IP ADDRESS : {myAddress}
     </div>
   )

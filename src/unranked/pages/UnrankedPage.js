@@ -165,8 +165,9 @@ const UnrankedPage = () => {
           <h1 className='welcome-header'>
             Welcome to the Lottery Store!
           </h1>
-          <IPAddressPage onGetIp={(ip) => setIPAddress(ip)}/>
-          <div>{ipAddress}</div>
+          <IPAddressPage 
+            onGetIp={(ip) => setIPAddress(ip)}
+          />
           <div className='wallet-container'>
             <div className='current-funds'>Current Funds: ${money}</div>
             <div className='ticket-deck'>

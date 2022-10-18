@@ -112,3 +112,13 @@
   position: fixed;
   left: 65vw;
 }
+
+.ip-address-box {
+  position: fixed;
+  left: 75vw;
+  width: 10vw;
+  top: 10vh;
+  height: 10vh;
+  border: 1px solid black;
+
+}
