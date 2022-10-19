@@ -11,7 +11,7 @@ const Fish = (props) => {
         left: `${props.fish.left}vw`,
         bottom: `${props.fish.bottom}vh`,
         width: `${props.fish.size * 1.5}vw`,
-        height: `${props.fish.size * 1.5}vw`,
+        height: `${props.fish.size * 1.5}vh`,
       }}
     >
       <ul className='fish-stats'>
