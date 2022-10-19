@@ -10,8 +10,8 @@ const Fish = (props) => {
         position: 'fixed',
         left: `${props.fish.left}vw`,
         bottom: `${props.fish.bottom}vh`,
-        width: `${props.fish.size * 1.5}vw`,
-        height: `${props.fish.size * 1.5}vh`,
+        width: `${props.fish.size}vw`,
+        height: `${props.fish.size}vh`,
       }}
     >
       <ul className='fish-stats'>

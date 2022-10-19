@@ -17,7 +17,7 @@ const Pond = (props) => {
     for (let i=0; i<5; i++) {
 
       let fish = loadFish(i);
-      const fishCoords = getFishCoord(15, 90, 10, 85, fishNet, fish);
+      const fishCoords = getFishCoord(15, 90, 10, 80, fishNet, fish);
       fish = {
         ...fish,
         left: fishCoords.x, 
