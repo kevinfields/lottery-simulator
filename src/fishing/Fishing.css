@@ -18,3 +18,17 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+.fish:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.fish-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  font-size: 8pt;
+  justify-content: space-around;
+  max-height: 6vh;
+}

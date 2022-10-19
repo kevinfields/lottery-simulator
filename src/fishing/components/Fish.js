@@ -13,6 +13,7 @@ const Fish = (props) => {
         width: `${props.fish.size}vw`,
         height: `${props.fish.size}vh`,
       }}
+      onClick={() => props.attemptCatch()}
     >
       <ul className='fish-stats'>
         <li>
@@ -25,9 +26,6 @@ const Fish = (props) => {
           Weight: {props.fish.size}kg
         </li>
       </ul>
-      <button onClick={() => props.attemptCatch()}>
-        Try to Catch
-      </button>
     </div>
   )
 }

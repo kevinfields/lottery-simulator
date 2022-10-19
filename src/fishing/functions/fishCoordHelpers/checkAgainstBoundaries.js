@@ -11,4 +11,4 @@ export default function checkAgainstBoundaries(bottomLeft, size, boundaries) {
   });
 
   return failure;
-}
+};
