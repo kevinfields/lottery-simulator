@@ -31,4 +31,7 @@
   font-size: 8pt;
   justify-content: space-around;
   max-height: 6vh;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0.5vh;
 }
