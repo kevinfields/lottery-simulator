@@ -18,7 +18,7 @@ const Pond = (props) => {
       let fish = loadFish(i);
       fish = {
         ...fish,
-        left: Math.floor(Math.random() * 70) + 15,
+        left: Math.floor(Math.random() * 60) + 15,
         bottom: Math.floor(Math.random() * 70) + 10,
         borderColor: colorArray[i],
       };
