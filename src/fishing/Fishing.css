@@ -55,6 +55,10 @@
   flex-direction: column;
   justify-content: space-evenly;
   border: 1px solid black;
-  height: 5vw;
-  width: 5vw;
+  height: 8vw;
+  width: 8vw;
+}
+
+.inv-slot-label {
+  text-align: center;
 }

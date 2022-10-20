@@ -3,6 +3,9 @@ import React from 'react'
 const InventorySlot = (props) => {
   return (
     <div className='inventory-slot'>
+      <div className='option-buttons'>
+        
+      </div>
       <div className='inv-slot-label'>
         ${props.item.value}
       </div>
