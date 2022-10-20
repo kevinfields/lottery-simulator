@@ -36,6 +36,16 @@
   margin: 0.5vh;
 }
 
+.wallet {
+  position: fixed;
+  left: 20vw;
+  top: 62.5vh;
+  color: darkgreen;
+  border: 1px solid green;
+  width: 10vw;
+  height: 5vh;
+}
+
 .inventory {
   display: flex;
   flex-direction: column;

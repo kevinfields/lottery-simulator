@@ -4,6 +4,7 @@ import getFishCoord from '../functions/getFishCoord';
 import loadFish from '../functions/loadFish';
 import Fish from './Fish';
 import Inventory from './Inventory';
+import Wallet from './Wallet';
 
 const colorArray = ['gray', 'green', 'blue', 'red', 'black', 'purple'];
 
@@ -11,6 +12,7 @@ const Pond = (props) => {
 
   const [currentFish, setCurrentFish] = useState([]);
   const [inventory, setInventory] = useState([]);
+  const [money, setMoney] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const loadFishes = () => {
@@ -52,6 +54,24 @@ const Pond = (props) => {
     setCurrentFish(copy);
   };
 
+  const sellItem = (key) => {
+
+    let copy = [...inventory];
+    copy.splice(key, 1);
+    setInventory(copy);
+    let earnings = inventory[key].value;
+    setMoney(Number(money) + Number(earnings));
+
+  };
+
+  const dropItem = (key) => {
+
+    let copy = [...inventory];
+    copy.splice(key, 1);
+    setInventory(copy);
+
+  };
+
   useEffect(() => {
     loadFishes();
   }, []);
@@ -69,7 +89,14 @@ const Pond = (props) => {
               attemptCatch={() => attemptCatch(key)}
             />
           ))}
-          <Inventory inventory={inventory} />
+          <Inventory 
+            inventory={inventory}
+            sellItem={(key) => sellItem(key)}
+            dropItem={(key) => dropItem(key)}
+          />
+          <Wallet
+            money={money}
+          />
         </>
       }
 
