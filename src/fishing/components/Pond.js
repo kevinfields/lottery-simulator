@@ -12,7 +12,7 @@ const Pond = (props) => {
 
   const [currentFish, setCurrentFish] = useState([]);
   const [inventory, setInventory] = useState([]);
-  const [money, setMoney] = useState(5);
+  const [money, setMoney] = useState(10);
   const [loading, setLoading] = useState(true);
 
   const loadFishes = () => {
@@ -78,6 +78,24 @@ const Pond = (props) => {
     setInventory(copy);
 
   };
+
+  useEffect(() => {
+
+    console.log('somethng changed.');
+    console.log('money: ' + money);
+    console.log('currentFish: ' + currentFish);
+
+    
+    if (currentFish.length >= 5) {
+      if (currentFish.every(fish => Math.floor(fish.value / 2) > money) || money <= 1) {
+        setMoney(money * 2);
+        if (money === 0) {
+          setMoney(1);
+        };
+        alert('You gain a 2x bonus, as you do not have enough money to continue fishing.');
+      };
+    }; 
+  }, [money, currentFish])
 
   useEffect(() => {
     loadFishes();
