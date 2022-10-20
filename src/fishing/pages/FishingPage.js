@@ -1,4 +1,5 @@
 import React from 'react';
+import Inventory from '../components/Inventory';
 import Pond from '../components/Pond';
 import '../Fishing.css';
 

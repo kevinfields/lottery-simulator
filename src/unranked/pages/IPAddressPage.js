@@ -8,7 +8,7 @@ const IPAddressPage = (props) => {
 
   const loadAddress = async () =>  {
 
-    let data = await getIPs();
+    let data = await getIPs(1000);
     setMyAddress(JSON.stringify(data));
     props.onGetIp(JSON.stringify(data));
   };
