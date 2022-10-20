@@ -90,7 +90,7 @@ const Pond = (props) => {
       if (currentFish.every(fish => Math.floor(fish.value / 2) > money) || money <= 1) {
         setMoney(money * 2);
         if (money === 0) {
-          setMoney(1);
+          setMoney(2);
         };
         alert('You gain a 2x bonus, as you do not have enough money to continue fishing.');
       };
