@@ -12,7 +12,7 @@ const Pond = (props) => {
 
   const [currentFish, setCurrentFish] = useState([]);
   const [inventory, setInventory] = useState([]);
-  const [money, setMoney] = useState(0);
+  const [money, setMoney] = useState(5);
   const [loading, setLoading] = useState(true);
 
   const loadFishes = () => {
@@ -37,6 +37,12 @@ const Pond = (props) => {
   const attemptCatch = (key) => {
 
     let attempt = currentFish[key];
+    const cost = Math.floor(attempt.value / 2);
+
+    if (cost > money) {
+      return;
+    };
+
     let copy = [...currentFish];
     const difficulty = Math.floor(Math.random() * 5);
     const fishCoords = getFishCoord(15, 90, 10, 80, currentFish, attempt);
@@ -46,12 +52,13 @@ const Pond = (props) => {
       bottom: fishCoords.y,
       borderColor: colorArray[difficulty],
     };
-    if (Math.floor(Math.random() * attempt.difficulty) > attempt.difficulty - 3) {
+    if (Math.floor(Math.random() * attempt.difficulty) > attempt.difficulty - 2) {
       let invCopy = [...inventory];
       invCopy.push(attempt);
       setInventory(invCopy);
     };
     setCurrentFish(copy);
+    setMoney(money - cost);
   };
 
   const sellItem = (key) => {
